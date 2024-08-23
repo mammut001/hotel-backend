@@ -12,11 +12,14 @@
   "description": "",
   "dependencies": {
     "@fastify/cors": "^9.0.1",
+    "@twilio-labs/serverless-runtime-types": "^4.0.1",
     "dayjs": "^1.11.13",
-    "fastify": "^4.28.1"
+    "fastify": "^4.28.1",
+    "uuid": "^10.0.0"
   },
   "devDependencies": {
     "@types/node": "^22.5.0",
+    "@types/uuid": "^10.0.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.5.4"
   }
