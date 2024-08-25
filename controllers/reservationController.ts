@@ -14,8 +14,7 @@ export const submitReservation = async (req: FastifyRequest, reply: FastifyReply
     console.log(requestPayload.end)
     console.log(requestPayload.phoneNumber)
     try{
-        const otp = otpGenerator.generate(6, { digits: true, specialChars:false, lowerCaseAlphabets:false, upperCaseAlphabets:false});
-        console.log(otp)
+
 
         //TODO store otp inside otp
         //ttl 30 minutes
@@ -23,10 +22,11 @@ export const submitReservation = async (req: FastifyRequest, reply: FastifyReply
             const res = await app.redis.get(`otp:${requestPayload.phoneNumber}`)
             console.log("res "+ res)
             if(!res){
+                const otp = otpGenerator.generate(6, { digits: true, specialChars:false, lowerCaseAlphabets:false, upperCaseAlphabets:false});
+                console.log(otp)
                 await app.redis.set(`otp:${requestPayload.phoneNumber}`, otp,"EX", 60*30)
                 app.log.info("key set successfully");
                 reply.send({ success: true, status_code:200, otp_code:otp});
-
             }
             else {
                 reply.send({ success: false, status_code: 409, msg:"Conflict!"});
