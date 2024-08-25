@@ -1,10 +1,9 @@
 
-
-import fastify from "fastify";
+//index.ts
+import fastify, {FastifyRequest} from "fastify";
 import cors from '@fastify/cors'
 import connectingDatabaseRoutes from "./routes/retrieveUsers";
 import reservationRoutes from "./routes/submitReservation";
-
 const app = fastify({logger:true})
 app.register(cors, {
     origin: 'http://localhost:3000'
