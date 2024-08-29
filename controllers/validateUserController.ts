@@ -8,7 +8,7 @@ export type requestBody = {
     end: dayjs.Dayjs,
     phoneNumber: string,
 }
-export const submitReservation = async (req: FastifyRequest, reply: FastifyReply) => {
+export const validateUser = async (req: FastifyRequest, reply: FastifyReply) => {
     const requestPayload = req.body as requestBody
     console.log(requestPayload.start)
     console.log(requestPayload.end)

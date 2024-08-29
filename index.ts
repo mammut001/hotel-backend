@@ -3,8 +3,8 @@
 import fastify, {FastifyRequest} from "fastify";
 import cors from '@fastify/cors'
 import connectingDatabaseRoutes from "./routes/retrieveUsers";
-import reservationRoutes from "./routes/submitReservation";
-import validateOTPRoute from "./routes/validateOTP";
+import validateUserRoute from "./routes/validateUser";
+import submitReservation from "./routes/submitReservation";
 const app = fastify({logger:true})
 app.register(cors, {
     origin: 'http://localhost:3000'
@@ -12,7 +12,7 @@ app.register(cors, {
 })
 
 
-app.register(reservationRoutes)
+app.register(validateUserRoute)
 app.register(connectingDatabaseRoutes)
-app.register(validateOTPRoute)
+app.register(submitReservation)
 export default app;

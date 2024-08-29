@@ -33,12 +33,12 @@ const insertQuery = async (phoneNumber:string,start:dayjs.Dayjs, end:dayjs.Dayjs
         app.log.error("query error:", err)
     }
 }
-export const validateOTPController = async(req: FastifyRequest, reply: FastifyReply) => {
+export const submitReservationController = async(req: FastifyRequest, reply: FastifyReply) => {
     const requestPayload = req.body as requestBody
     console.log(requestPayload.otpCode)
     const retrievedResultFromRedis = await app.redis.get(`otp:${requestPayload.phoneNumber}`)
     if (retrievedResultFromRedis === requestPayload.otpCode) {
-        //insert sql query to insert data once the otp is validated..
+        //insert sql query to insert data once the otp is validated...
         await insertQuery(requestPayload.phoneNumber,requestPayload.start,requestPayload.end)
         reply.send({ success: true, status_code:200, msg: "validated!"})
     }
