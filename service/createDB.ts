@@ -14,7 +14,8 @@ export const db: sqlite3.Database = new sqlite3.Database("user_database.db", (er
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             phoneNumber TEXT NOT NULL,
             start TEXT NOT NULL,
-            end TEXT NOT NULL
+            end TEXT NOT NULL,
+            uuid TEXT NOT NULL
         )`, (err) =>{
             if (err){
                 app.log.error("ERROR", err);

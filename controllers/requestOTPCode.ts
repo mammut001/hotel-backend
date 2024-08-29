@@ -1,17 +1,13 @@
 import {FastifyRequest, FastifyReply} from 'fastify'
-import dayjs,{Dayjs} from "dayjs";
 import {sendSMS} from "../service/sendSMS";
 import otpGenerator from 'otp-generator'
 import app from "../index";
-export type requestBody = {
-    start: dayjs.Dayjs,
-    end: dayjs.Dayjs,
+type requestBody = {
     phoneNumber: string,
 }
 export const validateUser = async (req: FastifyRequest, reply: FastifyReply) => {
     const requestPayload = req.body as requestBody
-    console.log(requestPayload.start)
-    console.log(requestPayload.end)
+
     console.log(requestPayload.phoneNumber)
     try{
 
@@ -45,6 +41,11 @@ export const validateUser = async (req: FastifyRequest, reply: FastifyReply) => 
         // const urlSuffix = await sendSMS(requestPayload.phoneNumber, otp)
         // reply.send({ success: true, url: urlSuffix });
         //
+
+        //First Request to request OTP
+        //{
+        //     "phoneNumber": "+xxxxxxxxx"
+        // }
 
     }
     catch (err){
