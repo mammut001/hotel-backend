@@ -4,27 +4,24 @@ import app from "../index";
 export const connectingDBController = async (req: FastifyRequest, reply: FastifyReply) => {
     try{
         const queryPromise = new Promise((resolve, reject) => {
-            db.get(`SELECT * FROM users`, (err, row) => {
+            db.all(`SELECT * FROM user_registration`, (err, rows) => {
                 if (err) {
                     reject(err)
                 } else {
-                    resolve(row)
+                    resolve(rows)
                 }
             })
         })
         try {
-            const row = await queryPromise
-            if (row) {
-                app.log.info("Query Result:", row)
-                return reply.send({
-                    message: "Database connection successful",
-                    data: row,
-                });
-            } else {
-                return reply.send({
-                    message: "Database connection successful, but no data found",
-                });
-                }
+            const rows = await queryPromise
+            if (rows) {
+                app.log.info("Query Result:", rows)
+                return reply.send({message: "Query Result:", data: rows,});
+            }
+            else
+            {
+                return reply.send({message: "Database connection successful, but no data found",});
+            }
             }
             catch (err) {
             app.log.error("Database error:", err)
